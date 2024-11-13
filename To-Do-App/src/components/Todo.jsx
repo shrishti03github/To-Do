@@ -3,7 +3,8 @@ import todo_icon from "../assets/todo_icon.png";
 import TodoItems from "./TodoItems";
 
 const Todo = () => {
-  const [todolist, setTodoList] = useState([]);
+  const [todolist, setTodoList] = useState(localStorage.getItem("todos")?
+JSON.parse(localStorage.getItem("todos")):[]);
 
   const inputref = useRef();
   const add = () => {
@@ -38,7 +39,9 @@ const toggle = (id)=>{
         })
     })
 }
-  useEffect(()=>{},[todolist])
+  useEffect(()=>{
+    localStorage.setItem("todos",JSON.stringify(todolist))
+  },[todolist])
 
   return (
     <div
